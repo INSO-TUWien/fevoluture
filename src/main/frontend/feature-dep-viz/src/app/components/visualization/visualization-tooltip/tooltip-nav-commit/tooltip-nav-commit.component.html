@@ -1,0 +1,9 @@
+<li [class.active]="active">
+  <span><sl-fdv-feature-icons *ngIf="!hideFeatureIcons" [features]="commit | featuresOf | async"></sl-fdv-feature-icons> <span *ngIf="active">Inspected-----></span> {{ commit.commitTime.millis | date: 'dd.MM.yy' }}</span>
+  <span>{{ commit.hash | slice : 0 : 8 }}</span>
+  <a (click)="show(commit)"><i class="pi pi-search"></i></a>
+  <a (click)="goToCommit(commit)" *ngIf="!active"><i *ngIf="commit.commitTime.millis !== current.commitTime.millis"
+                                                     class="pi"
+                                                     [ngClass]="commit.commitTime.millis >  current.commitTime.millis ? 'pi-forward' : 'pi-backward'"></i>
+  </a>
+</li>

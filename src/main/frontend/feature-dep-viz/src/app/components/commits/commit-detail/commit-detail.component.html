@@ -1,0 +1,18 @@
+<div class="meta">
+  <div>
+    {{ commitSelection?.commit?.authorName }}   {{ commitSelection.commit?.authorEmail }}
+  </div>
+  <div>
+    <div>{{ commitSelection?.commit?.commitTime | datetime : 'dd.MM.yy HH:mm' }}</div>
+    <sl-fdv-feature-icons [features]="commitSelection?.features"></sl-fdv-feature-icons>
+    {{ commitSelection?.commit?.message}}
+  </div>
+</div>
+<p class="mb-4">
+  <button class="btn btn-success" (click)="addCommitToFeature(commitSelection.commit)">Add to feature</button>
+  <button class="btn btn-danger mx-1" (click)="removeCommitFromFeature(commitSelection.commit)">Remove from feature</button>
+</p>
+
+<sl-fdv-commit-diff *ngIf="commitSelection.commit" [commit]="commitSelection.commit"></sl-fdv-commit-diff>
+
+

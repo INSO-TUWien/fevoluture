@@ -1,0 +1,21 @@
+<div class="visualization-tooltip" [ngStyle]="{'left.px': position.x, 'top.px': position.y}">
+  <button
+    pButton
+    icon="pi pi-times"
+    type="button"
+    class="p-button-raised p-button-rounded p-button-danger float-right"
+    (click)="close()"></button>
+
+  <ng-container *ngIf="data">
+  <sl-fdv-tooltip-edge-content *ngIf="isEdge; else isNode"
+                               [data]="data"
+                               [currentAbstractionLevel]="currentAbstractionLevel">
+  </sl-fdv-tooltip-edge-content>
+
+  <ng-template #isNode>
+    <sl-fdv-tooltip-node-content
+      [data]="data"
+      [currentAbstractionLevel]="currentAbstractionLevel"></sl-fdv-tooltip-node-content>
+  </ng-template>
+  </ng-container>
+</div>

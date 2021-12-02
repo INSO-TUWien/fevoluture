@@ -1,0 +1,9 @@
+li {
+  display: flex;
+  align-items: center;
+}
+
+.commits {
+  max-height: 20rem;
+  overflow: auto;
+}

@@ -1,0 +1,10 @@
+::ng-deep {
+  .p-inputtext::-webkit-input-placeholder {
+    opacity: 0;
+  }
+
+
+  .p-inputtext:focus::-webkit-input-placeholder {
+    opacity: 1;
+  }
+}

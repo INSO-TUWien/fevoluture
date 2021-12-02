@@ -1,0 +1,21 @@
+<h2>
+  <sl-fdv-feature-icons [features]="[feature]"></sl-fdv-feature-icons>
+  {{ feature.name }}
+</h2>
+
+<h3>Feature Issues</h3>
+<sl-fdv-feature-issue-list [featureIssues]="feature.issues"
+                           (added)="addIssueCommitsToFeature($event)"
+                           (showed)="showIssueDetail($event)"
+                           (removed)="removeIssueFromFeature($event)"
+></sl-fdv-feature-issue-list>
+
+
+<h3>Feature Commits</h3>
+<sl-fdv-feature-commit-list [featureCommits]="feature.commits"
+                            (showed)="showCommitDetail($event)"
+                            (removed)="removeCommitFromFeature($event)">
+</sl-fdv-feature-commit-list>
+
+<h3>Feature Source Code</h3>
+<sl-fdv-feature-source-code-tree [feature]="feature"></sl-fdv-feature-source-code-tree>

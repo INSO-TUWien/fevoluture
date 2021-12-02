@@ -1,0 +1,26 @@
+tr.active {
+    font-weight: 600;
+
+  td {
+    background-color: lightblue;
+  }
+}
+
+.nav-button {
+  flex-grow: 1;
+  font-size: 1.8rem;
+  font-weight: 600;
+  background-color: lightgrey;
+  text-align: center;
+  padding: .5rem 3rem;
+
+  &:hover, &focus {
+    background: darkgray;
+  }
+}
+
+::ng-deep .navigation-commits {
+  position: relative;
+  max-height: 37rem;
+  overflow: auto;
+}

@@ -1,0 +1,24 @@
+<p-accordion>
+  <p-accordionTab header="Visualization settings" cache="true">
+    <sl-fdv-visualization-filter-options>
+      <div class="mb-4">
+        <small>Configure the visualization to your personal needs.</small>
+      </div>
+    </sl-fdv-visualization-filter-options>
+  </p-accordionTab>
+</p-accordion>
+<div #visualizationWrapper id="visualizationWrapper">
+  <svg></svg>
+  <sl-fdv-visualization-tooltip *ngIf="selectedElement"
+                                [data]="selectedElement"
+  [position]="selectedElementPosition"
+  (close)="onCloseTooltip()">
+
+  </sl-fdv-visualization-tooltip>
+  <ng-container *ngIf="isLoadingVisualization$ | async" >
+    <div class="loading">
+      <p-progressSpinner></p-progressSpinner>
+      <p>Load visualization...</p>
+    </div>
+  </ng-container>
+</div>

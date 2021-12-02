@@ -1,0 +1,16 @@
+.visualization-tooltip {
+  position: absolute;
+  min-width: 10rem;
+  min-height: 10rem;
+  z-index: 1;
+  background-color: white;
+  padding: 1rem;
+  border-radius: .5rem;
+  border: 1px solid darkgrey;
+
+  h2 {
+    span {
+      white-space: nowrap;
+    }
+  }
+}

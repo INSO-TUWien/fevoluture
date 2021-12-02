@@ -1,0 +1,30 @@
+<div>
+  <p-table [value]="featureCommits"
+           [autoLayout]="true">
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Date</th>
+        <th>Commit</th>
+        <th>Issue(s)</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td slFdvColorBackground [color]="rowData['color']"> {{ rowData['commitTime'] | datetime : 'dd.MM.yy' }}</td>
+        <td><a href="javascript: void(0)" (click)="onShow(rowData)">{{ rowData['hash'] | ellipsis : {maxLength: 8} }}</a></td>
+        <td><a [href]="rowData['message'] | issueId | jiraLink" [target]="'_blank'">{{ rowData['message'] | issueId}}</a></td>
+        <td>
+          <div class="d-flex justify-content-start">
+            <button class="btn btn-primary " (click)="onShow(rowData)"><i class="pi pi-search"></i></button>
+            <button class="btn btn-danger" (click)="onRemove(rowData)"><i
+              class="pi pi-trash pointer"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

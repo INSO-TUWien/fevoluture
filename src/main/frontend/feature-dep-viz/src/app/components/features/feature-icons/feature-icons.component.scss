@@ -1,0 +1,22 @@
+$circle-size: 2rem;
+
+span {
+  display: inline-block;
+  width: $circle-size;
+  height: $circle-size;
+  border-radius: 10rem;
+  cursor: pointer;
+
+  &:not(:last-of-type) {
+    margin-right: 1.2rem;
+  }
+
+  &.border {
+    border: 3px solid black !important;
+  }
+
+  &.larger {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}

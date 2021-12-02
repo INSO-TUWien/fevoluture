@@ -1,0 +1,50 @@
+<ng-container [ngSwitch]="currentAbstractionLevel">
+  <!--  {{ data | json }}-->
+  <h2>
+    <sl-fdv-feature-icons [features]="data.source.features"></sl-fdv-feature-icons>
+    {{ data.source | entityTooltipName }} →
+    <sl-fdv-feature-icons [features]="data.target.features"></sl-fdv-feature-icons>
+    {{ data.target | entityTooltipName }}</h2>
+
+  <div>
+    <div class="mb-3">confidence →: {{ data.countChangedTogether }} / {{ data.countRoot }} =
+      <strong>{{ data.confidence | number :  '1.0-3' }}</strong>  <i class="pi pi-info-circle"
+                                                                    [pTooltip]="(data.source | entityTooltipName) + ' has changed in '+ data.countRoot + ' commits. In ' + data.countChangedTogether + ' of those commits ' + ( data.target | entityTooltipName) + ' has changed as well.'"
+                                                                    tooltipPosition="top" tooltipStyleClass='lc-tooltip'></i></div>
+    <div>confidence ←: {{ data.countChangedTogether }} / {{ data.countEntity }} =
+      <strong>{{ reverseConfidence | number :  '1.0-3' }}</strong>  <i class="pi pi-info-circle"
+                                                                       [pTooltip]="(data.target | entityTooltipName) + ' has changed in '+ data.countEntity + ' commit. In ' + data.countChangedTogether + ' of those commits ' + ( data.source | entityTooltipName) + ' has changed as well.'"
+                                                                       tooltipPosition="top" tooltipStyleClass='lc-tooltip'></i></div>
+    <div>
+      support: {{ data.countChangedTogether }} / {{  countBoth }} =
+      <strong>{{ data.support | number :  '1.0-3' }}</strong> <i class="pi pi-info-circle"
+                                                                 [pTooltip]="countBoth + ' commits contain either ' + (data.source | entityTooltipName) + ' or ' + (data.target | entityTooltipName) + '. ' + (data.countChangedTogether) + ' of those commits contain both of them.'"
+                                                                 tooltipPosition="top" tooltipStyleClass='lc-tooltip'></i></div>
+  </div>
+
+  <div *ngIf="commits$ | async as commits" class="commits">
+    <ng-container *ngIf="(currentCommit$ | async) as currentCommit">
+
+      <h3>Commits ({{ commits.length }})</h3>
+      <ul>
+        <sl-fdv-tooltip-nav-commit *ngFor="let commit of commitsBeforeCurrent$ | async"
+                                   [commit]="commit"
+                                   [current]="currentCommit">
+        </sl-fdv-tooltip-nav-commit>
+
+        <sl-fdv-tooltip-nav-commit
+          [commit]="currentCommit"
+          [active]="true"
+          [hideFeatureIcons]="hideFeatureIconsForCurrentCommit$ | async">
+        </sl-fdv-tooltip-nav-commit>
+
+        <sl-fdv-tooltip-nav-commit *ngFor="let commit of commitsAfterCurrent$ | async"
+                                   [commit]="commit"
+                                   [current]="currentCommit">
+        </sl-fdv-tooltip-nav-commit>
+      </ul>
+    </ng-container>
+  </div>
+
+
+</ng-container>

@@ -1,0 +1,65 @@
+<p-accordion *ngIf="initValue$ | async as initValue">
+  <p-accordionTab header="Commit Filter">
+    <sl-fdv-commit-filter [initValue]="initValue" (filterChanged)="onFilterChanged($event)">
+      <div>
+        <small>Filter all commits.</small>
+      </div>
+    </sl-fdv-commit-filter>
+  </p-accordionTab>
+</p-accordion>
+
+<div id="commitList">
+
+  <div *ngIf="(isLoading$ | async); else list">
+    <p-progressSpinner></p-progressSpinner>
+    <p>Load commits</p>
+  </div>
+
+  <ng-template #list>
+    <div *ngIf="(page$ | async) as page">
+      <p-table [value]="page.content"
+               [rows]="12"
+               [autoLayout]="true">
+
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th>Date</th>
+            <th>Message</th>
+            <th>Author</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td> {{ rowData['commitTime'] | datetime : 'dd.MM.yy HH:mm' }}</td>
+            <td> {{ rowData['message'] }}</td>
+            <td> {{ rowData['authorName']}}</td>
+            <td>
+              <div class="d-flex justify-content-start">
+                <button class="btn btn-success" (click)="addCommitToCurrentFeature(rowData)"><i class="pi pi-plus"></i>
+                </button>
+                <button class="btn btn-primary " (click)="show(rowData)"><i class="pi pi-search"></i></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+
+    </div>
+  </ng-template>
+</div>
+
+<p-paginator *ngIf="page$ | async as page" [rows]="12"
+             [class.hidden]="isLoading$ | async"
+             [first]="page.number * page.size"
+             [templateRight]="right"
+             (onPageChange)="paginate($event)"
+             [totalRecords]="page.totalElements"></p-paginator>
+
+<ng-template #right>
+  <strong class="pr-2">Total records:  {{ (page$ | async).totalElements }}</strong>
+  <button class="fs-14px btn btn-success" (click)="allAllToCurrentFeature()">Add all</button>
+</ng-template>
+

@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between mb-4 align-items-center">
+  <h2>Features</h2>
+  <button class="btn btn-success" (click)="addNewFeature()"><i class="pi pi-plus"></i> Add new feature</button>
+</div>
+<p-table *ngIf="!isLoading; else loading"
+         [value]="features$ | async"
+         [rows]="12"
+         [autoLayout]="true"
+         [styleClass]="'feature-list'">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Color</th>
+      <th>Name</th>
+      <th class="text-center">Visualized</th>
+      <th class="text-center">Details</th>
+      <th class="text-center">Delete</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData" (click)="setSelectedFeature(rowData)" class="cursor-pointer">
+      <td>
+        <sl-fdv-feature-icons [features]="[rowData]"></sl-fdv-feature-icons>
+      </td>
+      <td> {{ rowData['name'] }}</td>
+      <td class="text-center">
+        <i class="pi font-weight-bold"
+           [ngClass]="rowData['visualized'] ? 'pi-check' : 'pi-times'"
+           [color]="rowData['visualized'] ? '#28a745' : '#dc3545'"
+           slFdvColor></i>
+
+      </td>
+      <td class="text-center">
+        <button class="btn btn-primary"><i class="pi pi-eye"></i>
+        </button>
+      </td>
+      <td class="text-center">
+        <button class="btn btn-danger" (click)="removeFeature(rowData)"><i class="pi pi-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<sl-fdv-feature-form *ngIf="selectedFeature$ | async" [feature]="selectedFeature$ | async"></sl-fdv-feature-form>
+
+<ng-template #loading>
+  <div>
+    <p-progressSpinner></p-progressSpinner>
+    <p>Loading features</p>
+  </div>
+</ng-template>

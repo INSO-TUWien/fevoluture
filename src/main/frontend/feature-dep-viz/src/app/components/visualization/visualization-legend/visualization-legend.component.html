@@ -1,0 +1,14 @@
+<div class="legend">
+  <ul>
+    <li>Node size = Importance</li>
+    <li *ngFor="let feature of features$ | async">
+      <sl-fdv-feature-icons [features]="[feature]"></sl-fdv-feature-icons> {{ feature.name }}
+    </li>
+    <li>
+      <sl-fdv-feature-icons [features]="[border]" [hasBorder]="true"></sl-fdv-feature-icons> {{ border.name }}
+    </li>
+<!--    <li>-->
+<!--      <sl-fdv-feature-icons [features]="[larger]" [isLarger]="true"></sl-fdv-feature-icons> {{ larger.name }}-->
+<!--    </li>-->
+  </ul>
+</div>

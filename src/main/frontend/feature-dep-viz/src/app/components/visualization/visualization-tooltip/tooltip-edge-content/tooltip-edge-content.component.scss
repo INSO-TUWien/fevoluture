@@ -1,0 +1,19 @@
+.commits {
+  max-height: 20rem;
+  overflow: auto;
+}
+
+.pi.pi-info-circle {
+  margin-left: .5rem;
+  cursor: pointer;
+}
+
+::ng-deep .lc-tooltip {
+  max-width: 25rem;
+  padding: 1rem;
+  font-size: 1.4rem;
+
+  .p-tooltip-text {
+    padding: 1rem 1.5rem;
+  }
+}

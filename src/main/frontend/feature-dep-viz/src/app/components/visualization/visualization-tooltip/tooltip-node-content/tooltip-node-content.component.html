@@ -1,0 +1,47 @@
+<ng-container [ngSwitch]="currentAbstractionLevel">
+
+  <div *ngSwitchCase="AbstractionLevel.FILE">
+    <h2>
+      <sl-fdv-feature-icons [features]="data.features"></sl-fdv-feature-icons>
+      {{ data | entityTooltipName }}</h2>
+    <p>Path: {{ data.path }}</p>
+  </div>
+
+  <div *ngSwitchCase="AbstractionLevel.PACKAGE">
+    <h2>
+      <sl-fdv-feature-icons [features]="data.features"></sl-fdv-feature-icons>
+      {{ data | entityTooltipName }}</h2>
+  </div>
+
+  <div *ngSwitchCase="AbstractionLevel.METHOD">
+    <h2>
+      <sl-fdv-feature-icons [features]="data.features"></sl-fdv-feature-icons>
+      {{ data | entityTooltipName }}</h2>
+    <p>File: {{ data.file.path }}</p>
+  </div>
+</ng-container>
+
+<div *ngIf="{
+commits: commits$ | async,
+ currentCommit: currentCommit$ | async} as observables" class="commits">
+  <ng-container *ngIf="observables.currentCommit && observables.commits?.length">
+    <h3>Commits ({{ observables.commits.length }})</h3>
+    <ul *ngIf="observables.commits.length">
+
+      <sl-fdv-tooltip-nav-commit *ngFor="let commit of commitsAfterCurrent$ | async"
+                                 [commit]="commit"
+                                 [current]="observables.currentCommit">
+      </sl-fdv-tooltip-nav-commit>
+      <sl-fdv-tooltip-nav-commit [commit]="observables.currentCommit"
+                                 [active]="true"
+                                 [hideFeatureIcons]="hideFeatureIconsForCurrentCommit$ | async">
+      </sl-fdv-tooltip-nav-commit>
+      <sl-fdv-tooltip-nav-commit *ngFor="let commit of commitsBeforeCurrent$ | async"
+                                 [commit]="commit"
+                                 [current]="observables.currentCommit">
+      </sl-fdv-tooltip-nav-commit>
+    </ul>
+  </ng-container>
+</div>
+
+

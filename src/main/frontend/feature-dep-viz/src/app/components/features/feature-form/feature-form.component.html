@@ -1,0 +1,35 @@
+<h2> {{ feature.name }}</h2>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="p-fluid p-grid">
+
+    <div class="p-field p-col-6">
+        <span class="p-float-label">
+          <label for="featureName"></label>
+          <input id="featureName"
+                 formControlName="name"
+                 type="text"
+                 name="feature-name"
+                 placeholder="Feature Name"
+                 pInputText>
+        </span>
+    </div>
+  </div>
+
+  <div>
+    <label for="featureColor">Color</label>
+    <p-colorPicker id="featureColor" formControlName="color" styleClass="feature-colorpicker"></p-colorPicker>
+  </div>
+
+  <div class="p-field-checkbox">
+    <label for="featureVisualized">Visualized</label>
+    <p-checkbox
+      name="visualized"
+      value="true"
+      inputId="featureVisualized"
+      id="featureVisualized"
+      formControlName="visualized"
+      binary="true"></p-checkbox>
+  </div>
+
+  <button pButton type="submit" label="Save "></button>
+</form>

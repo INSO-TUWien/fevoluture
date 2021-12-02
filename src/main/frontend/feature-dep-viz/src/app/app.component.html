@@ -1,0 +1,33 @@
+<header>
+  <nav>
+    <ul>
+      <li *ngIf="!isUser">
+        <button pButton type="button" label="Issues"
+                [routerLink]="{outlets: { primary: 'issues', aside: 'feature-sidebar'}}" queryParamsHandling="merge"></button>
+      </li>
+      <li *ngIf="!isUser">
+        <button pButton type="button" label="Commits"
+                [routerLink]="{outlets: { primary: 'commits', aside: 'feature-sidebar'}}" queryParamsHandling="merge"></button>
+      </li>
+      <li>
+        <button pButton type="button" label="Visualization"
+                [routerLink]="{outlets: { primary: 'visualization', aside: 'commit-navigator'}}" queryParamsHandling="merge"></button>
+      </li>
+      <li *ngIf="!isUser">
+        <button pButton type="button" label="Features"
+                [routerLink]="{outlets: { primary: 'features', aside: 'feature-sidebar'}}" queryParamsHandling="merge"></button>
+      </li>
+      <li>
+        <button pButton type="button" label="Scenarios"
+                [routerLink]="{outlets: { primary: 'admin', aside: 'feature-sidebar'}}" queryParamsHandling="merge"></button>
+      </li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<aside>
+  <router-outlet name="aside"></router-outlet>
+</aside>
+

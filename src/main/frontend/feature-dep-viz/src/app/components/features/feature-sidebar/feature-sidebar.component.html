@@ -1,0 +1,5 @@
+<div class="d-flex flex-row-reverse">
+  <sl-fdv-feature-dropdown></sl-fdv-feature-dropdown>
+</div>
+
+<sl-fdv-feature-detail *ngIf="selectedFeature$ | async as selectedFeature" [feature]="selectedFeature"></sl-fdv-feature-detail>

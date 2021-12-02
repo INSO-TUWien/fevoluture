@@ -1,0 +1,56 @@
+<div class="commit-filter">
+  <ng-content></ng-content>
+
+  <form  [formGroup]="commitFilterForm">
+  <div class="p-fluid p-grid">
+
+    <div class="p-field p-col-8 p-md-4">
+       <span class="p-float-label">
+      <p-dropdown [options]="authors$ | async" formControlName="author"
+                  [filter]="true"
+                  filterBy="label,value.name"
+                  inputId="commitAuthor"
+                  [virtualScroll]="true"
+                  itemSize="30"
+                  showClear="true"></p-dropdown>
+         <label for="commitAuthor">Author</label>
+       </span>
+    </div>
+
+    <div class="p-field p-col-4 p-md-4">
+        <span class="p-float-label">
+          <input id="message" formControlName="msg" name="msg" pInputText>
+          <label for="message">Commit message</label>
+        </span>
+    </div>
+
+    <div class="p-field p-col-12 p-md-4">
+        <span class="p-float-label">
+        <input id="hash" formControlName="hash" name="hash" pInputText>
+        <label for="hash">Hash</label>
+        </span>
+    </div>
+
+    <div class="p-field p-col-12 p-md-4">
+        <span class="p-float-label">
+            <p-calendar formControlName="fromDate" dateFormat="dd.mm.yy" placeholder="dd.mm.yyyy"></p-calendar>
+            <label>from Date</label>
+        </span>
+    </div>
+
+    <div class="p-field p-col-12 p-md-4">
+        <span class="p-float-label">
+            <p-calendar formControlName="toDate" dateFormat="dd.mm.yy" placeholder="dd.mm.yyyy"></p-calendar>
+            <label>to Date</label>
+        </span>
+    </div>
+
+    <div class="p-field p-col-12 p-md-4">
+        <span class="p-float-label">
+          <input id="fileName" formControlName="fileName" name="fileName" pInputText>
+          <label for="fileName">File name</label>
+        </span>
+    </div>
+  </div>
+  </form>
+</div>

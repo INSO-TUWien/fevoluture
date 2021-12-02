@@ -1,0 +1,49 @@
+<p-accordion *ngIf="visualizedCommitFilter$ | async as filter">
+  <p-accordionTab [header]="'Filter feature commits (' + (commits$ | async)?.length + ')'">
+    <sl-fdv-commit-filter [initValue]="filter" (filterChanged)="onFilterChanged($event)"></sl-fdv-commit-filter>
+  </p-accordionTab>
+</p-accordion>
+
+<div *ngIf="(commits$ | async) as commits">
+<!--  <div class="d-flex justify-content-center my-2">-->
+<!--    <button class="btn btn-default nav-button mx-2" (click)="setNextCommitActive()"><i class="pi pi-caret-left"></i>-->
+<!--      Back-->
+<!--    </button>-->
+<!--    <button class="btn btn-default nav-button mx-2" (click)="setPreviousCommitActive()">Forward <i-->
+<!--      class="pi pi-caret-right"></i>-->
+<!--    </button>-->
+<!--  </div>-->
+  <p-table styleClass="navigation-commits"
+    [value]="commits"
+           [rows]="12"
+           [autoLayout]="true">
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Date</th>
+        <th>Message</th>
+        <th>Author</th>
+        <th>Hash</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData" class="cursor-pointer nav-commit-ele"
+          [class.active]="(currentCommit$ | async)?.hash === rowData['hash']"
+          (click)="setActiveCommit(rowData)">
+        <td><sl-fdv-feature-icons [features]="rowData | featuresOf | async"></sl-fdv-feature-icons> {{ rowData['commitTime'] | datetime : 'dd.MM.yy' }}</td>
+        <td>{{ rowData['message'] | commitMessage | ellipsis: {maxLength: 120, append: '...'} }}</td>
+        <td>{{ rowData['authorName']}}</td>
+        <td>{{ rowData['hash'] | ellipsis: {maxLength: 8} }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+<ng-container *ngIf="currentCommit$ | async as currentCommit">
+  <p-message *ngIf="currentCommit.changedFiles?.length === 0" severity="warn" text="Commits with no changed files are merge requests which
+do not add new modifications."></p-message>
+  <sl-fdv-commit-diff [commit]="currentCommit"></sl-fdv-commit-diff>
+</ng-container>
+

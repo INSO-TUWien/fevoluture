@@ -1,0 +1,4 @@
+<p-dropdown *ngIf="(features$ | async) as features"
+  [options]="features"
+  [(ngModel)]="selectedFeature"
+  optionLabel="name" (onChange)="onChange($event.value)"></p-dropdown>

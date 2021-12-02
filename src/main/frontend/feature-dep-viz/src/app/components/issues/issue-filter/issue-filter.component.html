@@ -1,0 +1,85 @@
+<div class="issue-filter">
+  <ng-content></ng-content>
+  <form class="form-group" [formGroup]="issueFilterForm">
+    <div class="p-fluid p-grid">
+
+      <div class="p-field p-col-4 p-md-4">
+        <span class="p-float-label">
+          <input id="id" formControlName="issueId" name="id" pInputText>
+          <label for="id">Issue ID</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-4 p-md-4">
+        <span class="p-float-label">
+          <input id="text" formControlName="text" name="text" pInputText>
+          <label for="text">Text</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-8 p-md-4">
+       <span class="p-float-label">
+        <p-dropdown [options]="authors$ | async"
+                    formControlName="author"
+                    [filter]="true"
+                    filterBy="label,value.name"
+                    inputId="issueAuthor"
+                    [virtualScroll]="true"
+                    itemSize="30"
+                    showClear="true"></p-dropdown>
+         <label for="issueAuthor">Author</label>
+       </span>
+      </div>
+
+      <div class="p-field p-col-8 p-md-4">
+       <span class="p-float-label">
+        <p-dropdown [options]="trackers$ | async"
+                    formControlName="tracker"
+                    [filter]="true"
+                    filterBy="label,value.name"
+                    inputId="trackerDropdown"
+                    showClear="true"></p-dropdown>
+         <label for="trackerDropdown">Tracker</label>
+       </span>
+      </div>
+
+      <div class="p-field p-col-8 p-md-4">
+       <span class="p-float-label">
+        <p-dropdown [options]="status$ | async"
+                    formControlName="status"
+                    [filter]="true"
+                    filterBy="label,value.name"
+                    inputId="statusDropdown"
+                    showClear="true"></p-dropdown>
+         <label for="statusDropdown">Status</label>
+       </span>
+      </div>
+
+      <div class="p-field p-col-8 p-md-4">
+       <span class="p-float-label">
+        <p-dropdown [options]="status$ | async"
+                    formControlName="status"
+                    [filter]="true"
+                    filterBy="label,value.name"
+                    inputId="statusDropdown"
+                    showClear="true"></p-dropdown>
+         <label for="statusDropdown">Status</label>
+       </span>
+      </div>
+
+      <div class="p-field p-col-8 p-md-4">
+       <span class="p-float-label">
+          <p-calendar formControlName="fromDate" dateFormat="dd.mm.yy"></p-calendar>
+          <label>from Date</label>
+       </span>
+      </div>
+
+      <div class="p-field p-col-8 p-md-4">
+       <span class="p-float-label">
+          <p-calendar formControlName="toDate" dateFormat="dd.mm.yy"></p-calendar>
+          <label>to Date</label>
+       </span>
+      </div>
+    </div>
+  </form>
+</div>

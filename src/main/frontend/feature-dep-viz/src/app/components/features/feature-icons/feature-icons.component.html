@@ -1,0 +1,9 @@
+<span *ngFor="let feature of features"
+      [color]="feature?.color | color"
+      (click)="copyFeatureName(feature)"
+      [class.larger]="isLarger"
+      [class.border]="hasBorder"
+      pTooltip="{{ feature?.name}}"
+      [showDelay]="100"
+      [hideDelay]="100"
+      slFdvColorBackground></span>

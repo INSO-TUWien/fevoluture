@@ -1,0 +1,49 @@
+HELP.md
+target/
+.mvn
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### Application ###
+repo/
+repo_mongo/
+repobackup/
+src/main/resources/application.properties
+app.log
+app.log.*
+src/main/resources/static/*
+codemr/
+test.xml
+db_backup/
+tmp/
+
+commons_math/
+amq/
+commons_io/
